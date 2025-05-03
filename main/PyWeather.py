@@ -31,7 +31,7 @@ def quitter_programme():
 
 #initialisation variable
 ville=""
-api_key="2d4fd4772f0b78f3d44b9623526adbdd"
+api_key="XX"
 
 root = tk.Tk()
 root.title("PyWeather")
