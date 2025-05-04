@@ -1,0 +1,45 @@
+{
+    "base": "stations",
+    "clouds": {
+        "all": 75
+    },
+    "cod": 200,
+    "coord": {
+        "lat": 38.7167,
+        "lon": -9.1333
+    },
+    "dt": 1746377349,
+    "id": 2267057,
+    "main": {
+        "feels_like": 18.04,
+        "grnd_level": 1006,
+        "humidity": 72,
+        "pressure": 1014,
+        "sea_level": 1014,
+        "temp": 18.28,
+        "temp_max": 18.96,
+        "temp_min": 17.02
+    },
+    "name": "Lisbon",
+    "sys": {
+        "country": "PT",
+        "id": 6901,
+        "sunrise": 1746336927,
+        "sunset": 1746387064,
+        "type": 1
+    },
+    "timezone": 3600,
+    "visibility": 10000,
+    "weather": [
+        {
+            "description": "broken clouds",
+            "icon": "04d",
+            "id": 803,
+            "main": "Clouds"
+        }
+    ],
+    "wind": {
+        "deg": 260,
+        "speed": 6.17
+    }
+}
