@@ -163,6 +163,7 @@ heure_leve_soleil = ""
 root = tk.Tk()
 root.title("PyWeather")
 root.minsize(250, 250)
+root.iconbitmap("png/PyWeather_icon.ico")
 
 #déclaration image
 image_clear_sky= PhotoImage(file="png/hot_sun_weather_icon.png")
