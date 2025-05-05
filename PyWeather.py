@@ -10,6 +10,7 @@ import os
 import requests
 import json
 from datetime import datetime
+from tkinter import PhotoImage
 
 
 #Déclaration variable
@@ -71,29 +72,79 @@ def lecture_json():
     heure_leve_soleil = leve_soleil.strftime("%X")
     return temperature, temperature_min, temperature_max, humidite, meteo, vent, direction_vent, heure_couche_soleil, heure_leve_soleil
 
+
 def affichage_meteo():
+    def choix_image():
+        global image_clear_sky
+        global image_few_clouds
+        global image_overcast_clouds
+        global image_drizzle
+        global image_rain
+        global image_shower_rain
+        global image_thunderstorm
+        global image_snow
+        global image_mist
+        global meteo
+        choix=str(meteo)
+        match choix:
+            case "clear sky":
+                label_image_meteo.config(image=image_clear_sky)
+
+            case "few clouds":
+                label_image_meteo.config(image=image_few_clouds)
+
+            case"overcast clouds":
+                label_image_meteo.config(image=image_overcast_clouds)
+
+            case"drizzle":
+                label_image_meteo.config(image=image_drizzle)
+
+            case"rain":
+                label_image_meteo.config(image=image_rain)
+
+            case"shower rain":
+                label_image_meteo.config(image=image_shower_rain)
+
+            case"thunderstorm":
+                label_image_meteo.config(image=image_thunderstorm)
+
+            case"snow":
+                label_image_meteo.config(image=image_snow)
+
+            case"mist":
+                label_image_meteo.config(image=image_mist)
+
+            case _:
+                label_image_meteo.config(text="Image non trouvé")
     resquest_weather()
     lecture_json()
     top_fenetre = Toplevel(root)
     top_fenetre.minsize(400, 250)
+    top_fenetre.columnconfigure((0,1),weight =1,uniform='a')
+    top_fenetre.rowconfigure((0,1,2,3,4,5,6,7,8),weight =1,uniform='a')
+    label_image_meteo = Label(master = top_fenetre, text ="")
+    label_image_meteo.grid(row = 0,column = 1,rowspan=9)
+    choix_image()
     label_meteo = Label(master = top_fenetre, text="La météo est " + str(meteo), font="Helvetica 12 ")
-    label_meteo.pack(pady=5)
+    label_meteo.grid(row = 0,column = 0)
     label_temperature = Label(master = top_fenetre, text="La tempétature est de "+ str(temperature)+" °C", font="Helvetica 12 ")
-    label_temperature.pack(pady=5)
+    label_temperature.grid(row = 1,column = 0)
     label_temperature_min = Label(master = top_fenetre, text="La tempétature minimal sera de : "+ str(temperature_min)+" °C", font="Helvetica 12 ")
-    label_temperature_min.pack(pady=5)
+    label_temperature_min.grid(row = 2,column = 0)
     label_temperature_max = Label(master = top_fenetre, text="La tempétature maximal sera de : "+ str(temperature_max)+" °C", font="Helvetica 12 ")
-    label_temperature_max.pack(pady=5)
+    label_temperature_max.grid(row = 3,column = 0)
     label_humidite = Label(master = top_fenetre, text="L'humidité est de : "+ str(humidite) +"%", font="Helvetica 12 ")
-    label_humidite.pack(pady=5)
+    label_humidite.grid(row = 4,column = 0)
     label_vent = Label(master = top_fenetre, text="Le vent de : "+ str(vent) +"KM/h", font="Helvetica 12 ")
-    label_vent.pack(pady=5)
+    label_vent.grid(row = 5,column = 0)
     label_direction_vent = Label(master = top_fenetre, text="La direction du vent est de : "+ str(direction_vent) +"°" , font="Helvetica 12 ")
-    label_direction_vent.pack(pady=5)
+    label_direction_vent.grid(row = 6,column = 0)
     label_leve_soleil = Label(master = top_fenetre, text="Le soleil se lève à "+ str(heure_leve_soleil) , font="Helvetica 12 ")
-    label_leve_soleil.pack(pady=5)
+    label_leve_soleil.grid(row = 7,column = 0)
     label_couche_soleil = Label(master = top_fenetre, text="Le soleil se couche à  "+ str(heure_couche_soleil) , font="Helvetica 12 ")
-    label_couche_soleil.pack(pady=5)
+    label_couche_soleil.grid(row = 8,column = 0)
+
+
 
 #initialisation variable global
 ville=""
@@ -111,30 +162,42 @@ heure_leve_soleil = ""
 #Interface graphique
 root = tk.Tk()
 root.title("PyWeather")
-root.minsize(500, 500)
+root.minsize(250, 250)
 
-boite_titre = Frame(root)
-boite_bouton = Frame(root)
-boite_bottom = Frame(root)
+#déclaration image
+image_clear_sky= PhotoImage(file="png/hot_sun_weather_icon.png")
+image_few_clouds= PhotoImage(file="png/cloud_cloudy_sun_sunny_weather_icon.png")
+image_overcast_clouds= PhotoImage(file="png/cloud_weather_icon.png")
+image_drizzle= PhotoImage(file="png/cloud_drizzle_rain_weather_icon.png")
+image_rain= PhotoImage(file="png/cloud_rain_weather_icon.png")
+image_shower_rain= PhotoImage(file="png/cloud_heavy rain_rain_weather_icon.png")
+image_thunderstorm= PhotoImage(file="png/cloud_heavy rain_rain_storm_thunderbolt_icon.png")
+image_snow= PhotoImage(file="png/cloud_cold_weather_winter_icon.png")
+image_mist= PhotoImage(file="png/cloud_foggy_weather_cloudy_forecast_icon.png")
 
-label_bienvenue = Label(master= boite_titre, text="Bienvenue dans PyWeather ", font="Helvetica 18 bold")
-label_bienvenue.pack(pady= 15)
+#Grid
+root.columnconfigure((0),weight =1,uniform='a')
+root.rowconfigure((0,1,2,3,4,5,6,7),weight =1,uniform='a')
 
-label_nomville = Label(master = boite_bottom, text="Le nom de votre ville est : "+ str(ville), font="Helvetica 12 ")
-label_nomville.pack()
+label_bienvenue = Label(master= root, text="Bienvenue dans PyWeather ", font="Helvetica 18 bold")
+label_bienvenue.grid(row = 0,column = 0, sticky="n")
 
-bouton_ajouter = Button(master= boite_bouton, text="Ajoutez le nom de la ville", font="Helvetica 12" ,command=ajout_ville , width = 20)
-bouton_ajouter.pack(pady= 5)
+image_main = PhotoImage(file="png/weather_icon.png")
+label_image = Label(master = root, image= image_main)
+label_image.grid(row = 1,column = 0,sticky="nwse")
 
-bouton_voir = Button(master= boite_bouton, text="Voir la météo",font="Helvetica 12",command=affichage_meteo , width = 20)
-bouton_voir.pack(pady= 5)
+label_nomville = Label(master = root, text="Le nom de votre ville est : "+ str(ville), font="Helvetica 12 ")
+label_nomville.grid(row = 6,column = 0, sticky="n")
 
-bouton_quitter = Button(boite_bouton, text="Quitter programe",font="Helvetica 12" ,command=quitter_programme , width = 20)
-bouton_quitter.pack(pady= 5)
+bouton_ajouter = Button(master= root, text="Ajoutez le nom de la ville", font="Helvetica 12" ,command=ajout_ville , width = 20)
+bouton_ajouter.grid(row = 3,column = 0, sticky="n")
 
-boite_titre.pack(side=TOP)
-boite_bouton.pack()
-boite_bottom.pack(side=BOTTOM, pady = 30)
+bouton_voir = Button(master= root, text="Voir la météo",font="Helvetica 12",command=affichage_meteo , width = 20)
+bouton_voir.grid(row = 4,column = 0, sticky="n")
+
+bouton_quitter = Button(root, text="Quitter",font="Helvetica 12" ,command=quitter_programme)
+bouton_quitter.grid(row = 7,column = 0, sticky="n")
+
 
 #Mainloop
 root.mainloop()

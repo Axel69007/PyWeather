@@ -1,46 +1,45 @@
 {
     "base": "stations",
     "clouds": {
-        "all": 100
+        "all": 0
     },
     "cod": 200,
     "coord": {
-        "lat": 45.75,
-        "lon": 4.5833
+        "lat": 48.8534,
+        "lon": 2.3488
     },
-    "dt": 1746449871,
-    "id": 2996943,
+    "dt": 1746459738,
+    "id": 2988507,
     "main": {
-        "feels_like": 6.2,
-        "grnd_level": 949,
-        "humidity": 87,
-        "pressure": 1010,
-        "sea_level": 1010,
-        "temp": 7.52,
-        "temp_max": 8.72,
-        "temp_min": 7.23
+        "feels_like": 12.72,
+        "grnd_level": 1006,
+        "humidity": 46,
+        "pressure": 1015,
+        "sea_level": 1015,
+        "temp": 14.06,
+        "temp_max": 15.2,
+        "temp_min": 13.41
     },
-    "name": "Arrondissement de Lyon",
+    "name": "Paris",
     "sys": {
         "country": "FR",
-        "id": 2007821,
-        "sunrise": 1746418993,
-        "sunset": 1746471205,
+        "id": 2012208,
+        "sunrise": 1746419005,
+        "sunset": 1746472265,
         "type": 2
     },
     "timezone": 7200,
     "visibility": 10000,
     "weather": [
         {
-            "description": "overcast clouds",
-            "icon": "04d",
-            "id": 804,
-            "main": "Clouds"
+            "description": "clear sky",
+            "icon": "01d",
+            "id": 800,
+            "main": "Clear"
         }
     ],
     "wind": {
-        "deg": 332,
-        "gust": 7.82,
-        "speed": 2.12
+        "deg": 30,
+        "speed": 7.72
     }
 }
