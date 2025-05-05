@@ -1,45 +1,46 @@
 {
     "base": "stations",
     "clouds": {
-        "all": 75
+        "all": 100
     },
     "cod": 200,
     "coord": {
-        "lat": 38.7167,
-        "lon": -9.1333
+        "lat": 45.75,
+        "lon": 4.5833
     },
-    "dt": 1746377349,
-    "id": 2267057,
+    "dt": 1746449871,
+    "id": 2996943,
     "main": {
-        "feels_like": 18.04,
-        "grnd_level": 1006,
-        "humidity": 72,
-        "pressure": 1014,
-        "sea_level": 1014,
-        "temp": 18.28,
-        "temp_max": 18.96,
-        "temp_min": 17.02
+        "feels_like": 6.2,
+        "grnd_level": 949,
+        "humidity": 87,
+        "pressure": 1010,
+        "sea_level": 1010,
+        "temp": 7.52,
+        "temp_max": 8.72,
+        "temp_min": 7.23
     },
-    "name": "Lisbon",
+    "name": "Arrondissement de Lyon",
     "sys": {
-        "country": "PT",
-        "id": 6901,
-        "sunrise": 1746336927,
-        "sunset": 1746387064,
-        "type": 1
+        "country": "FR",
+        "id": 2007821,
+        "sunrise": 1746418993,
+        "sunset": 1746471205,
+        "type": 2
     },
-    "timezone": 3600,
+    "timezone": 7200,
     "visibility": 10000,
     "weather": [
         {
-            "description": "broken clouds",
+            "description": "overcast clouds",
             "icon": "04d",
-            "id": 803,
+            "id": 804,
             "main": "Clouds"
         }
     ],
     "wind": {
-        "deg": 260,
-        "speed": 6.17
+        "deg": 332,
+        "gust": 7.82,
+        "speed": 2.12
     }
 }

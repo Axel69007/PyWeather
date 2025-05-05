@@ -9,6 +9,8 @@ import tkinter as tk
 import os
 import requests
 import json
+from datetime import datetime
+
 
 #Déclaration variable
 def quitter_programme():
@@ -50,8 +52,8 @@ def lecture_json():
     global meteo
     global vent 
     global direction_vent 
-    global couche_soleil
-    global leve_soleil
+    global heure_couche_soleil
+    global heure_leve_soleil
     with open("weather.json", "r") as fichier_json:
         donnees = json.load(fichier_json)
     temperature = donnees["main"]["temp"]
@@ -61,33 +63,37 @@ def lecture_json():
     meteo = donnees["weather"][0]["description"]
     vent = donnees["wind"]["speed"]
     direction_vent = donnees["wind"]["deg"]
-    couche_soleil = donnees["sys"]["sunset"]
-    leve_soleil = donnees["sys"]["sunrise"]
-    return temperature, temperature_min, temperature_max, humidite, meteo, vent, direction_vent, couche_soleil, leve_soleil
+    raw_couche_soleil = donnees["sys"]["sunset"]
+    raw_leve_soleil = donnees["sys"]["sunrise"]
+    couche_soleil= datetime.fromtimestamp(raw_couche_soleil)
+    leve_soleil = datetime.fromtimestamp(raw_leve_soleil)
+    heure_couche_soleil = couche_soleil.strftime("%X")
+    heure_leve_soleil = leve_soleil.strftime("%X")
+    return temperature, temperature_min, temperature_max, humidite, meteo, vent, direction_vent, heure_couche_soleil, heure_leve_soleil
 
 def affichage_meteo():
     resquest_weather()
     lecture_json()
     top_fenetre = Toplevel(root)
-    top_fenetre.minsize(300, 250)
+    top_fenetre.minsize(400, 250)
     label_meteo = Label(master = top_fenetre, text="La météo est " + str(meteo), font="Helvetica 12 ")
-    label_meteo.pack()
-    label_temperature = Label(master = top_fenetre, text="La tempétature est de "+ str(temperature), font="Helvetica 12 ")
-    label_temperature.pack()
-    label_temperature_min = Label(master = top_fenetre, text="La tempétature minimal sera de : "+ str(temperature_min), font="Helvetica 12 ")
-    label_temperature_min.pack()
-    label_temperature_max = Label(master = top_fenetre, text="La tempétature maximal sera de : "+ str(temperature_max), font="Helvetica 12 ")
-    label_temperature_max.pack()
-    label_humidite = Label(master = top_fenetre, text="L'humidité est de' : "+ str(humidite) +"%", font="Helvetica 12 ")
-    label_humidite.pack()
-    label_vent = Label(master = top_fenetre, text="Le vent de : "+ str(vent) +"KMH", font="Helvetica 12 ")
-    label_vent.pack()
-    label_direction_vent = Label(master = top_fenetre, text="La direction du vent est : "+ str(direction_vent) , font="Helvetica 12 ")
-    label_direction_vent.pack()
-    label_leve_soleil = Label(master = top_fenetre, text="Le soleil se lève à "+ str(leve_soleil) , font="Helvetica 12 ")
-    label_leve_soleil.pack()
-    label_couche_soleil = Label(master = top_fenetre, text="Le soleil se couche à : "+ str(couche_soleil) , font="Helvetica 12 ")
-    label_couche_soleil.pack()
+    label_meteo.pack(pady=5)
+    label_temperature = Label(master = top_fenetre, text="La tempétature est de "+ str(temperature)+" °C", font="Helvetica 12 ")
+    label_temperature.pack(pady=5)
+    label_temperature_min = Label(master = top_fenetre, text="La tempétature minimal sera de : "+ str(temperature_min)+" °C", font="Helvetica 12 ")
+    label_temperature_min.pack(pady=5)
+    label_temperature_max = Label(master = top_fenetre, text="La tempétature maximal sera de : "+ str(temperature_max)+" °C", font="Helvetica 12 ")
+    label_temperature_max.pack(pady=5)
+    label_humidite = Label(master = top_fenetre, text="L'humidité est de : "+ str(humidite) +"%", font="Helvetica 12 ")
+    label_humidite.pack(pady=5)
+    label_vent = Label(master = top_fenetre, text="Le vent de : "+ str(vent) +"KM/h", font="Helvetica 12 ")
+    label_vent.pack(pady=5)
+    label_direction_vent = Label(master = top_fenetre, text="La direction du vent est de : "+ str(direction_vent) +"°" , font="Helvetica 12 ")
+    label_direction_vent.pack(pady=5)
+    label_leve_soleil = Label(master = top_fenetre, text="Le soleil se lève à "+ str(heure_leve_soleil) , font="Helvetica 12 ")
+    label_leve_soleil.pack(pady=5)
+    label_couche_soleil = Label(master = top_fenetre, text="Le soleil se couche à  "+ str(heure_couche_soleil) , font="Helvetica 12 ")
+    label_couche_soleil.pack(pady=5)
 
 #initialisation variable global
 ville=""
@@ -98,8 +104,8 @@ humidite = ""
 meteo = ""
 vent = ""
 direction_vent = ""
-couche_soleil = ""
-leve_soleil = ""
+heure_couche_soleil = ""
+heure_leve_soleil = ""
 
 
 #Interface graphique
